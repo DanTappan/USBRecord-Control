@@ -1,0 +1,5 @@
+#! /usr/bin/env bash
+#
+# Kill the last running rec process
+#
+kill -INT `cat /tmp/rec.pid` > /dev/null 2>&1

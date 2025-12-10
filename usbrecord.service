@@ -1,0 +1,11 @@
+[Unit]
+Description=USBRecord service
+After=network.target
+
+[Service]
+ExecStart=/etc/USBRecord/USBRecord-Control
+Type=exec
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

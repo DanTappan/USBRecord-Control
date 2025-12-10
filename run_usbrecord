@@ -1,0 +1,53 @@
+#! /usr/bin/env bash
+#
+# script to run USB recorder
+#
+CHANNELS=4
+DEV=`arecord -L | grep ^hw: | sed s/CARD=// | sed s/DEV=//`
+
+for x in /media/`whoami`/*; do
+  if [ -d $x/RECORD ]; then
+    OUTPUT_DIR=$x/RECORD
+  fi
+done
+
+for arg in $@; do
+  case $arg in
+    --channels)
+      CHANNELS=$2
+      shift
+      ;;
+     --device)
+       DEV=$2
+       shift
+       ;;
+     --output)
+       OUTPUT_DIR=$2
+       shift
+       ;;
+    esac
+    shift
+done
+
+if [ "$OUTPUT_DIR" = "" ]; then
+  echo "no output directory found"
+  exit
+fi
+
+if [ "$DEV" = "" ]; then
+  echo "no device found"
+  exit
+fi
+
+
+OUTPUT_FILE=$OUTPUT_DIR/`date +%F-%H-%M-%S`.caf
+echo Recording $CHANNELS channels from $DEV, Output File: $OUTPUT_FILE
+
+AUDIODEV=$DEV rec -c $CHANNELS -b 24 --buffer 262144 $OUTPUT_FILE &
+REC_PID=$!
+
+echo $REC_PID > /tmp/rec.pid
+wait $REC_PID
+
+
+
