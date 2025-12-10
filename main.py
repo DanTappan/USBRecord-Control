@@ -129,6 +129,8 @@ def usbrecord_thread():
                 if line:
                     line = line.strip("\n")
                     if not rec_parse(line):
+                        osc_task.set_custom("/custom-variable/record_log/value",
+                                            line)
                         print(f'usbrecord: {line}')
 
 def do_record(onoff):
@@ -141,6 +143,10 @@ if __name__ == '__main__' :
     threading.Thread(target=usbrecord_thread).start()
 
     osc_task = osc.OSCTask(do_record=do_record, setchannels=setchannels)
+
+    osc_task.set_custom("/custom-variable/recorder_reset/value",
+                        str(int(time.time())))
+
     try:
         while True:
             time.sleep(10)
