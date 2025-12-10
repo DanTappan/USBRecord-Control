@@ -5,7 +5,13 @@
 CHANNELS=4
 DEV=`arecord -L | grep ^hw: | sed s/CARD=// | sed s/DEV=//`
 
-for x in /media/`whoami`/*; do
+# Look for mounted USB drives which contain a 'RECORD' folder.
+#
+# This assumes either the system is running with a desktop (so drives are
+# automatically mounted on /media/<user>) or a version of usbmount is running
+# (so drives are mounted on /media/usb[0-9]
+#
+for x in /media/`whoami`/* /media/usb* ; do
   if [ -d $x/RECORD ]; then
     OUTPUT_DIR=$x/RECORD
   fi
@@ -48,6 +54,8 @@ REC_PID=$!
 
 echo $REC_PID > /tmp/rec.pid
 wait $REC_PID
+sync; sleep 10; sync
+
 
 
 
