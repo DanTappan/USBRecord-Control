@@ -10,12 +10,10 @@
 # Loop:
 # - run a separate thread for OSC commands
 # - on command, start up a 'rec' subprocess to record audio data
-# --  TODO: monitor parse status lines from rec
-# -- terminate 'rec' (SIGINT) on command
-# - TODO: add a keepalive function?
+# - terminate 'rec' on command
 #
 # TODO - add an audio player
-#
+
 #import io
 #import os
 import time
