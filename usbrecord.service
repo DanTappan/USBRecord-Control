@@ -3,9 +3,12 @@ Description=USBRecord service
 After=network.target
 
 [Service]
-ExecStart=/etc/USBRecord/USBRecord-Control
+ExecStart=/etc/usbrecord/USBRecord-Control
+User=USER
 Type=exec
 Restart=always
+Restart=on-failure
+KillSignal=SIGINT
 
 [Install]
 WantedBy=multi-user.target
