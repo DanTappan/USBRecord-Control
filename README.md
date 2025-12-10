@@ -20,6 +20,10 @@ The interface currently provides the following buttons
 - **Reset** - this button resyncronizes Companion with the recorder, it should only be needed if the **usbrecord** service is restarted
 - **Channels: n** - selects the number of channels to record, between 2 and 18. A short press on the button increments the number of channels, a long press decrements.
 
+## Debugging
+
+The recorder program will try to log errors, for example a failure to start the record process, to the Companion custom variable **custom:record_log**
+
 ## Installation
 
 The install script creates a new systemctl service **usbrecord** which will run at system startup as the current user
