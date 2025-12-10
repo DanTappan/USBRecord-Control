@@ -14,7 +14,9 @@ Raspberry Pi 4 or 5 with at least 4GB of memory and [BitFocus Companion](https:/
 ## Use
 
 The recorder can be controlled either through a Stream Deck or through the web based emulator Companion.
-The interface currently provides the following buttons
+
+The file [Sample.companionconfig](Sample.companionconfig) can be imported into Bitfocus Companion to set up the default set of buttons, which currently provides the following:
+
 - **Record/Stop** (this button will be labeled **Record** when the recorder is idle and **Stop** when it is active)
 - Below the **Record/Stop** button is a display-only button which dynamically displays the size of the current file when recording is active
 - **Reset** - this button resyncronizes Companion with the recorder, it should only be needed if the **usbrecord** service is restarted
@@ -29,6 +31,8 @@ The recorder program will try to log errors, for example a failure to start the 
 The install script creates a new systemctl service **usbrecord** which will run at system startup as the current user
 
 The Quick Install procedure below uses a copy of the application from the repository, which was pre-built for ARM64 Debian based systems (e.g. Raspian, Armbian) using pyinstaller. Alternatively you can clone the repository and build your own copy prior to running the install script
+
+
 
 ### Quick Install
 
