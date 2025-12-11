@@ -7,7 +7,7 @@ sudo systemctl stop usbrecord
 
 # Prerequisites
 sudo apt update -y && sudo apt upgrade -y
-sudo apt-get install sox libsox-fmt-all
+sudo apt-get -y install sox libsox-fmt-all
 
 #
 # Install automount package so that USB drives are automatically mounted on connect
@@ -25,7 +25,7 @@ sudo mv exfat /etc/pi-usb-automount.d
 
 # Check whether companion is installed and running. If not, install it
 systemctl status companion
-if [ "$?" != 0 ]l then
+if [ "$?" != 0 ]; then
   curl https://raw.githubusercontent.com/bitfocus/companion-pi/main/install.sh | sudo bash
 fi
 
