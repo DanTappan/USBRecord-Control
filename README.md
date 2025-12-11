@@ -49,7 +49,7 @@ prior to running the install script
 ### Quick Install
 
 ```
-rm -rf USBRecord-Control; git clone https://github.com/DanTappan/USBRecord-Control; cd USBRecord-Control; bash ./install.sh
+rm -rf USBRecord-Control; git clone https://github.com/DanTappan/USBRecord-Control; ( cd USBRecord-Control; bash ./install.sh )
 ```
 
 
