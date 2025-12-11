@@ -24,11 +24,10 @@ EOF
 sudo mv exfat /etc/pi-usb-automount.d
 
 # Check whether companion is installed and running. If not, install it
-systemctl status companion
+systemctl status companion > /dev/null
 if [ "$?" != 0 ]; then
   curl https://raw.githubusercontent.com/bitfocus/companion-pi/main/install.sh | sudo bash
 fi
-
 
 #
 # if you want to be appropriately paranoid, run pyinstaller on USBRecord-Control.spec
