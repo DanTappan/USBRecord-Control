@@ -41,7 +41,7 @@ if [ "$OUTPUT_DIR" = "" ]; then
 fi
 
 if [ "$DEV" = "" ]; then
-  echo "no device found"
+  echo "no recording device found"
   exit
 fi
 

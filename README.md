@@ -15,12 +15,19 @@ Raspberry Pi 4 or 5 with at least 4GB of memory and [BitFocus Companion](https:/
 
 The recorder can be controlled either through a Stream Deck or through the web based emulator Companion.
 
-The file [Sample.companionconfig](Sample.companionconfig) can be imported into Bitfocus Companion to set up the default set of buttons, which currently provides the following:
+The file [USBRecord.companionconfig](USBRecord.companionconfig) can be imported into Bitfocus Companion to set up the default set of buttons, which currently provides the following:
 
+### Main Page
 - **Record/Stop** (this button will be labeled **Record** when the recorder is idle and **Stop** when it is active)
 - Below the **Record/Stop** button is a display-only button which dynamically displays the size of the current file when recording is active
-- **Reset** - this button resyncronizes Companion with the recorder, it should only be needed if the **usbrecord** service is restarted
 - **Channels: n** - selects the number of channels to record, between 2 and 18. A short press on the button increments the number of channels, a long press decrements.
+- **Control Page**: Switches to a page of buttons with control functions
+
+### Control Page
+- **Main Page**: Switches back to the main page of buttons
+- **Reset** - this button resyncronizes Companion with the recorder, it should only be needed if the **usbrecord** service is restarted
+- **Shutdown**: A long press on this button shuts down and powers off the recorder Pi
+
 
 ## Debugging
 
@@ -28,11 +35,16 @@ The recorder program will try to log errors, for example a failure to start the 
 
 ## Installation
 
-The install script creates a new systemctl service **usbrecord** which will run at system startup as the current user
+The installation script does the following
+- installs BitFocus companion (if not already running)
+- installs a service 'pi-usb-automount' which automounts USB drives on systems which are not 
+running a desktop
+- creates a new systemctl service **usbrecord** which will run at system startup as the current user
 
-The Quick Install procedure below uses a copy of the application from the repository, which was pre-built for ARM64 Debian based systems (e.g. Raspian, Armbian) using pyinstaller. Alternatively you can clone the repository and build your own copy prior to running the install script
+Currently, you have to import the **USBRecord.companionconfig** by hand to set up the buttons
 
-
+The Quick Install procedure below uses a copy of the application from the repository, which was pre-built for ARM64 Debian based systems (e.g. Raspian, Armbian) using pyinstaller. Alternatively you can clone the repository and build your own copy 
+prior to running the install script
 
 ### Quick Install
 
