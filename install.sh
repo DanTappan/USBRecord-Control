@@ -10,18 +10,20 @@ sudo apt update -y && sudo apt upgrade -y
 sudo apt-get -y install sox libsox-fmt-all
 
 #
-# Install automount package so that USB drives are automatically mounted on connect
+# If not already installed, Install automount package so that USB drives are automatically mounted on connect
 # this is only required on systems without a desktop, should we check for that?
 #
-wget https://github.com/fasteddy516/pi-usb-automount/releases/latest/download/pi-usb-automount.deb
-sudo dpkg -i pi-usb-automount.deb
-cat > exfat <<EOF
+if [ ! -d /etc/pi-usb-automount ]; then
+  wget https://github.com/fasteddy516/pi-usb-automount/releases/latest/download/pi-usb-automount.deb
+  sudo dpkg -i pi-usb-automount.deb
+  cat > exfat <<EOF
 # -*- sh -*-
 
 # Options to use for auto-mounting devices detected with a exfat filesystem
 AUTOMOUNT_OPTS='uid=1000,gid=1000,rw,nosuid,nodev,noexec,relatime,fmask=0000,dmask=0000,iocharset=utf8,errors=remount-ro'
 EOF
-sudo mv exfat /etc/pi-usb-automount.d
+  sudo mv exfat /etc/pi-usb-automount.d
+fi
 
 # Check whether companion is installed and running. If not, install it
 systemctl status companion > /dev/null
