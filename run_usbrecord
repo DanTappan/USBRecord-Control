@@ -3,7 +3,7 @@
 # script to run USB recorder
 #
 CHANNELS=4
-DEV=`arecord -L | grep ^hw: | sed s/CARD=// | sed s/DEV=//`
+DEV=`./probe_device`
 
 # Look for mounted USB drives which contain a 'RECORD' folder.
 #

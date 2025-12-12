@@ -18,8 +18,9 @@ class OSCTask:
         if Debug:
             print(f'osc-set_custom: {variable} {value}')
 
-        self.client.send_message(variable, value)
+        self.client.send_message(f'/custom-variable/{variable}/value', value)
 
+    @staticmethod
     def default_handler(address, *args):
         if Debug:
             print(f'osc-default: {address} {args}')
@@ -41,9 +42,9 @@ class OSCTask:
         elif address == "/record/config/channels":
             try:
                 channels = int(args[0])
+                self.setchannels(channels)
             except ValueError:
                 print(f"osc-config: bad value for channels {args[0]}")
-            self.setchannels(channels)
         if clientchange:
             self.client = SimpleUDPClient(self.OSC_ServerHost, self.OSC_ServerPort)
 

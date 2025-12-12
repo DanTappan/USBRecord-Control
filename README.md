@@ -41,10 +41,14 @@ The installation script does the following
 running a desktop
 - creates a new systemctl service **usbrecord** which will run at system startup as the current user
 
-Currently, you have to import the **USBRecord.companionconfig** by hand to set up the buttons
-
 The Quick Install procedure below uses a copy of the application from the repository, which was pre-built for ARM64 Debian based systems (e.g. Raspian, Armbian) using pyinstaller. Alternatively you can clone the repository and build your own copy 
 prior to running the install script
+
+Currently, you have to import the **USBRecord.companionconfig** by hand to set up the buttons
+
+In order for the shutdown command to work, you must use **ssh-keygen** to create a private key
+for user **companion** (in /home/companion/.ssh) and install the associated public key in
+/home/*user*/.ssh/authorized_keys
 
 ### Quick Install
 
