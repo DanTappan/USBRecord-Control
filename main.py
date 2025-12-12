@@ -36,7 +36,7 @@ probe_device = False
 def timer_thread():
     global probe_device
 
-    sleep(30)   # Give Companion time to start up
+    time.sleep(30)   # Give Companion time to start up
     while True:
         probe_device = True
         time.sleep(300)
