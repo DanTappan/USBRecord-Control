@@ -25,7 +25,7 @@ The file [USBRecord.companionconfig](USBRecord.companionconfig) can be imported 
 
 ### Control Page
 - **Main Page**: Switches back to the main page of buttons
-- **Reset** - this button resyncronizes Companion with the recorder, it should only be needed if the **usbrecord** service is restarted
+- **Reset** - this button resynchronizes Companion with the recorder, it should only be needed if the **usbrecord** service is restarted
 - **Shutdown**: A long press on this button shuts down and powers off the recorder Pi
 
 
@@ -36,8 +36,8 @@ The recorder program will try to log errors, for example a failure to start the 
 ## Installation
 
 The installation script does the following
-- installs BitFocus companion (if not already running)
-- installs a service 'pi-usb-automount' which automounts USB drives on systems which are not 
+- installs BitFocus Companion (if not already running)
+- installs a service '[pi-usb-automount](https://github.com/fasteddy516/pi-usb-automount/)' which automounts USB drives on systems which are not 
 running a desktop
 - creates a new systemctl service **usbrecord** which will run at system startup as the current user
 
