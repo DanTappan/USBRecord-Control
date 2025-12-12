@@ -79,9 +79,10 @@ def record_status(onoff):
     osc_task.set_custom("record_status", onoff)
 
 def setchannels(num):
-    global usb_channels
+    global usb_channels, probe_device
     """"Set the number of channels to record"""
     usb_channels = num
+    probe_device = True # force a device probe
 
 def run_usbrecord():
     """Start the usb_record script to run 'rec'"""
