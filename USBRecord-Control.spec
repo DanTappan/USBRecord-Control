@@ -5,7 +5,7 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[('run_usbrecord', '.'), ('kill_usbrecord', '.')],
+    datas=[('run_usbrecord', '.'), ('kill_usbrecord', '.'), ('probe_device', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
