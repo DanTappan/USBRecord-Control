@@ -3,7 +3,7 @@
 # script to run USB recorder
 #
 CHANNELS=4
-DEV=`./probe_device`
+DEV=""
 
 # Look for mounted USB drives which contain a 'RECORD' folder.
 #
@@ -17,7 +17,8 @@ for x in /media/`whoami`/* /media/usb* ; do
   fi
 done
 
-for arg in $@; do
+while [ "$#" != "0" ]; do
+  arg=$1
   case $arg in
     --channels)
       CHANNELS=$2
@@ -41,7 +42,7 @@ if [ "$OUTPUT_DIR" = "" ]; then
 fi
 
 if [ "$DEV" = "" ]; then
-  echo "no recording device found"
+  echo "no recording device"
   exit
 fi
 

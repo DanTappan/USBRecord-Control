@@ -30,6 +30,7 @@ usbrecord_terminate_process = False
 usbrecord_active = False
 usb_channels = 4
 probe_device = False
+record_device = "Unknown"
 
 # timer_thread - periodic timer
 #
@@ -44,12 +45,14 @@ def timer_thread():
 # find_device - run periodically to discover the connected
 # recording device
 def find_device():
-    output = subprocess.run([ './probe_device'],
+    global record_device
+
+    output = subprocess.run([ data_files.probedevice ],
                                 capture_output=True, text=True).stdout
     match = re.match("hw:([A-Za-z0-9]+)", output)
     if match:
+        record_device = output.strip("\n")
         osc_task.set_custom("record_device", match.group(1))
-
 
 # rec_parse - parse the output of 'rec'
 #
@@ -62,10 +65,6 @@ def rec_parse(line):
     match = rec_parse_prog.match(line)
     if match:
         osc_task.set_custom("record_bytes", match.group(1))
-    else:
-        match = re.match("Recording .+ from ([a-zA-Z0-9]+), Output File: .+", line)
-        if match:
-            osc_task.set_custom("record_device", match.group(1))
 
     return match
 
@@ -94,7 +93,9 @@ def run_usbrecord():
     args = [
         data_files.runrecord,
         "--channels",
-        str(usb_channels)
+        str(usb_channels),
+        "--device",
+        record_device
     ]
 
     try:
