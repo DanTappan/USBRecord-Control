@@ -44,9 +44,12 @@ running a desktop
 The Quick Install procedure below uses a copy of the application from the repository, which was pre-built for ARM64 Debian based systems (e.g. Raspian, Armbian) using pyinstaller. Alternatively you can clone the repository and build your own copy 
 prior to running the install script
 
-Currently, you have to import the **USBRecord.companionconfig** by hand to set up the buttons
+### INSTALLATION NOTE!!
 
-In order for the shutdown command to work, you must use **ssh-keygen** to create a private key
+- Currently, you have to import the **USBRecord.companionconfig** by hand to set up the buttons
+- You must enable the OSC server under "Settings->Protocol" 
+(settings are apparently not saved on a .companionconfig export)
+- In order for the shutdown command to work, you must use **ssh-keygen** to create a private key
 for user **companion** (in /home/companion/.ssh) and install the associated public key in
 /home/*user*/.ssh/authorized_keys
 
