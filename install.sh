@@ -8,6 +8,51 @@ sudo systemctl stop usbrecord
 # Prerequisites
 sudo apt update -y && sudo apt upgrade -y
 sudo apt-get -y install sox libsox-fmt-all
+sudo apt-get -y install python-pip3
+
+# *** START OF support for USB RTC
+#
+# This package uses timestamps to name the recording files
+# Raspberry Pi does not have a battery backed up clock, it asssumes that
+# it is connected to a network and can use NTP. It is possible (likely) that the
+# WiFi router on an XR18 does not have an Internet connection
+# The Following supports the SBC USB RTC clock - https://github.com/sbcshop/USB-C-RTC-Software
+#
+# Note that installing this is harmless on a system which does not have a USB RTC plugged in
+# the code will silently sleep 
+
+# Install SBC Computing PyMCP2221A if using SBC USB RTC
+sudo pip install PyMCP2221A --break-system-packages
+
+if [ ! -d ~/bin ]; then
+  mkdir ~/bin
+fi
+# Grab a copy of the app to read the USB RTC
+( cd ~/bin; 
+  wget https://raw.githubusercontent.com/sbcshop/USB-RTC-Software/refs/heads/main/Examples/Set_Time_Boot.py
+  wget https://raw.githubusercontent.com/sbcshop/USB-RTC-Software/refs/heads/main/Examples/Set_Time_From_Sysclock.py
+  chmod +x *.py
+
+  cat > Set_Time_From_RTC << EOF
+#! /bin/bash
+exec > /dev/null 2>&1
+while true; do
+   sudo ~/bin/Set_Time_Boot.py
+   if [ "$?" = "0" ] ; then
+       break
+   else
+       # Repeat until set time succeeds
+       sleep 300
+  fi
+done
+logger "Set System Clock from USB RTC: \`date\`"
+EOF
+chmod +x Set_Time_From_RTC
+
+echo Edit crontab to add : @reboot /home/`whoami`/bin/Set_Time_From_RTC
+)
+
+# *** END OF Support for USB RTC
 
 #
 # If not already installed, Install automount package so that USB drives are automatically mounted on connect
