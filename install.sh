@@ -12,11 +12,11 @@ sudo apt-get -y install python-pip3
 
 # *** START OF support for USB RTC
 #
-# This package uses timestamps to name the recording files
-# Raspberry Pi does not have a battery backed up clock, it asssumes that
-# it is connected to a network and can use NTP. It is possible (likely) that the
-# WiFi router on an XR18 does not have an Internet connection
-# The Following supports the SBC USB RTC clock - https://github.com/sbcshop/USB-C-RTC-Software
+# This package uses timestamps to name the recording files. Raspberry Pi does not have a battery backed up clock, it assumes that
+# it is connected to a network and can use NTP. It is possible (likely) that the WiFi router on an XR18 does not have an Internet connection
+# This means that the recording files will potentially hbe timestamped with the wrong date. 
+#
+# To avoid this, the following code supports the SBC USB RTC clock - https://github.com/sbcshop/USB-C-RTC-Software
 #
 # Note that installing this is harmless on a system which does not have a USB RTC plugged in
 # the code will silently sleep 
