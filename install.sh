@@ -38,7 +38,7 @@ fi
 exec > /dev/null 2>&1
 while true; do
    sudo ~/bin/Set_Time_Boot.py
-   if [ "$?" = "0" ] ; then
+   if [ "\$?" = "0" ] ; then
        break
    else
        # Repeat until set time succeeds
