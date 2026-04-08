@@ -1,5 +1,5 @@
 #
-# OSC Interface for VISCA-Game-Controller
+# OSC Interface
 # Task which receives OSC messages and turns them into control
 # messages
 #
